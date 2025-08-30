@@ -12,11 +12,25 @@ A continuación se detallan las distintas variantes del modelo que fueron implem
 
 ### 2.1 Modelo original de Fraiman ("Modelo Fraiman")
 
-Se implementa el modelo base propuesto en Fraiman, D. (2022), en el cual el vendedor recibe ofertas secuenciales, aceptando una oferta si es mayor a todas las ofertas que la preceden y mayor a la oferta posterior. El proceso se repite hasta que se cumple la condición de venta, en donde se observa la aparición de un precio crítico que depende tanto de la distribución de las ofertas y de la regla de aceptación. Esta sección sirve como punto de partida y referencia para comparar el efecto de las modificaciones posteriores.
+Se implementa el modelo base propuesto en Fraiman, D. (2022), en el cual el vendedor recibe ofertas de forma secuencial, aceptando la oferta si es mayor a todas las ofertas que la preceden pero también mayor a la oferta posterior.
+
+Este proceso es continuo en el tiempo, es decir, no hay una fecha límite para realizar las ofertas, lo que deriva en la aparición de un precio crítico que depende tanto de la distribución de las ofertas y de la regla de aceptación. Si la oferta es mayor a este precio, entonces tiene altas probabilidades de ser aceptada, y si es menor muy probablemente no lo sea.
+
+Esta modelo lo utilizamos como punto de partida y referencia para comparar el efecto de las modificaciones posteriores.
 
 ### 2.2 Modificación de la paciencia del vendedor (parámetro m)
 
-Se introduce un parámetro de paciencia `m`, que representa la cantidad de ofertas consecutivas que el vendedor está dispuesto a esperar antes de aceptar una oferta. Si el vendedor recibe `m` ofertas menores al máximo actual sin aceptar ninguna, entonces acepta la mejor de ellas. Esta modificación permite analizar cómo la paciencia del vendedor influye en el precio de venta y en la eficiencia del mecanismo de subasta. Se exploran diferentes valores de `m` para observar su impacto en los resultados.
+Se introduce un parámetro de paciencia $m$, que representa la cantidad de ofertas consecutivas que el vendedor está dispuesto a esperar antes de aceptar la oferta máxima. Es decir, el vendedor acepta la oferta únicamente si las $m$ ofertas posteriores son de menor valor.
+
+Esta modificación nos permite analizar cómo la paciencia del vendedor influye en el precio crítico de venta y en la eficiencia del mecanismo de subasta. Se exploran diferentes valores de $m$ para observar su impacto en los resultados.
+
+#### 2.2.1 Resultados
+
+Lo que podemos ver en la Figura 1 es que, cuanto mayor sea la paciencia del vendedor, mayor es el precio crítico que se genera. Esto tiene sentido porque si $m>>0$, entonces para que una oferta sobreviva tiene que tener un valor lo suficientemente alto tal que siga siendo la oferta de máximo valor dentro de todas las demás.
+
+<img src="attachments/metodo-1.png" />
+
+Esto también nos muestra existe un trade-off entre la cantidad de unidades que se vende
 
 ### 2.3 Memoria finita del vendedor
 
