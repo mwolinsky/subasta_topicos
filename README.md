@@ -30,7 +30,7 @@ Lo que podemos ver en la Figura 1 es que, cuanto mayor sea la paciencia del vend
 
 <img src="attachments/metodo-1.png" />
 
-Esto también nos muestra existe un trade-off entre la cantidad de unidades que se vende
+Esto también nos muestra existe un trade-off entre la cantidad de unidades que se terminan vendiendo y la paciencia del vendedor. Si el vendedor tiene poca paciencia ($m$ bajo), entonces vende muchas unidades del producto. Por otro lado, si el vendedor tiene mucha paciencia ($m$ alto), entonces vende pocas unidades. 
 
 ### 2.3 Memoria finita del vendedor
 
