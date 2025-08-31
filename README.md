@@ -132,19 +132,19 @@ END
 
 #### 2.3.2 Resultados
 
-Podemos observar en la Figura 2 como la memoria del vendedor termina afectando al precio de referencia. Para valores de $k$ bajos, vendedor recuerda solo unas pocas ofertas, vemos que no se genera un precio crítico como en el modelo original. El precio crítico aparece con mayor claridad a medida que incrementamos la memoria.
+Podemos observar en la Figura 2 como la memoria del vendedor termina afectando al precio de referencia. Para valores de $k$ bajos, el vendedor recuerda solo unas pocas ofertas, lo que dificulta la generación de un precio crítico como en el modelo original. El precio crítico se puede apreciar con mayor claridad a medida que incrementamos la memoria.
 
 <figure>
     <img src="attachments/memoria-finita.png"
          alt="Modificación 2: memoria finita del vendedor"/>
-    <figcaption><b>Figura 2.</b> Resultados de las subastas para distintos valores de memoria del vendedor. La línea punteada representa el precio crítico <math><mfrac><mi>1</mi><mi>e</mi></mfrac></math> encontrado en Fraiman, D. (2022).</figcaption> 
+    <figcaption><b>Figura 2.</b> Resultados de las subastas para distintos valores de memoria del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
 </figure>
 
 ### 2.4 Paciencia finita del comprador
 
 Introducimos la posibilidad de que los compradores tengan una paciencia limitada, es decir, que cada oferta tiene una vida útil $\tau$. Si la oferta no es aceptada en ese tiempo, el comprador se retira y su oferta deja de estar disponible.
 
-Exploramos valores fijos como aleatorios de paciencia para los compradores con el objetivo de analizar cómo la paciencia de los compradores afecta la dinámica de la subasta.
+Exploramos tanto valores fijos como aleatorios para la paciencia de los compradores con el objetivo de analizar cómo termina afectando a la dinámica de la subasta.
 
 #### 2.4.1 Algoritmo
 
@@ -207,7 +207,7 @@ El caso extremo de $\tau = 1$ nos muestra que cuando el comprador no tiene pacie
 <figure>
     <img src="attachments/impaciencia-fija.png"
          alt="Modificación 3: paciencia fija del comprador"/>
-    <figcaption><b>Figura 3.</b> Resultados de las subastas para distintos valores de paciencia del comprador. La línea punteada representa el precio crítico <math><mfrac><mi>1</mi><mi>e</mi></mfrac></math> encontrado en Fraiman, D. (2022).</figcaption> 
+    <figcaption><b>Figura 3.</b> Resultados de las subastas para distintos valores de paciencia del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
 </figure>
 
 #### 2.4.3 Resultados con paciencia $\tau$ aleatoria para cada comprador
@@ -217,12 +217,90 @@ Definimos ahora la paciencia $\tau$ del comprador utilizando una distribución e
 <figure>
     <img src="attachments/impaciencia-aleatoria.png"
          alt="Modificación 4: paciencia aletoria del comprador"/>
-    <figcaption><b>Figura 4.</b> Resultados de las subastas con paciencia aleatoria del comprador. La línea punteada representa el precio crítico <math><mfrac><mi>1</mi><mi>e</mi></mfrac></math> encontrado en Fraiman, D. (2022).</figcaption>
+    <figcaption><b>Figura 4.</b> Resultados de las subastas con paciencia aleatoria del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
 </figure>
 
 ### 2.5 Impaciencia del vendedor
 
-En esta modificación, el vendedor también puede tener impaciencia, vendiendo automáticamente después de recibir una cantidad fija de oferta, aunque no se haya alcanzado el precio crítico. Esto modela situaciones en las que el vendedor tiene una urgencia temporal o una necesidad de liquidez, y permite analizar cómo la presión temporal afecta las decisiones y los resultados de la subasta.
+En esta modificación, el vendedor también puede tener impaciencia, vendiendo automáticamente después de recibir una cantidad fija de ofertas, aunque no se haya alcanzado el precio crítico. Esto modela situaciones en las que el vendedor tiene una urgencia temporal o una necesidad de liquidez, y permite analizar cómo la presión temporal afecta las decisiones y los resultados de la subasta.
+
+#### 2.5.1 Algoritmo
+
+A continuación se detalla la implementación del alogritmo de subasta con impaciencia del vendedor.
+
+```pseudocode
+INPUT: 
+    bids[] - lista con todas las ofertas generadas
+    tau - máxima cantidad de ofertas que el vendedor está dispuesto a esperar
+    N - cantidad de ofertas
+
+VARIABLES:
+    accepted_bids[] - lista con las ofertas aceptadas
+    accepted_indices[] - lista con los índices de ofertas aceptadas
+    pending_bid - la mejor oferta dentro de las que están pendientes
+    pending_index - índice de la mejor oferta pendiente
+    
+BEGIN
+    INITIALIZE accepted_bids[] as empty array
+    INITIALIZE accepted_indices[] as empty array
+    SET pending_bid ← NULL
+    SET pending_index ← NULL
+    
+    FOR i FROM 1 TO N DO
+        current_bid ← bids[i]
+        
+        // First bid becomes the initial candidate
+        IF pending_bid = NULL THEN
+            SET pending_bid ← current_bid
+            SET pending_index ← i
+            CONTINUE
+        END IF
+        
+        // Check if seller's patience has been exhausted
+        IF (i - pending_index) >= tau THEN
+            // Accept the best bid found so far
+            ADD pending_bid TO accepted_bids[]
+            ADD pending_index TO accepted_indices[]
+            
+            // Current bid becomes new candidate
+            SET pending_bid ← current_bid
+            SET pending_index ← i
+            CONTINUE
+        END IF
+        
+        // If current bid is worse than pending bid, accept the pending bid
+        IF current_bid < pending_bid THEN
+            ADD pending_bid TO accepted_bids[]
+            ADD pending_index TO accepted_indices[]
+            
+            // Current bid becomes new candidate
+            SET pending_bid ← current_bid
+            SET pending_index ← i
+        ELSE
+            // Current bid is better, it becomes new candidate
+            // (previous candidate is discarded without acceptance)
+            SET pending_bid ← current_bid
+            SET pending_index ← i
+        END IF
+    END FOR
+    
+    // Final pending bid is never sold (remains unsold)
+    
+    RETURN accepted_bids[], accepted_indices[]
+END
+```
+
+#### 2.5.2 Resultados
+
+En la Figura 5 podemos observar que cuanto más impaciente es el vendedor, menor probabilidad tenemos de que se genere un precio crítico como en el modelo original. 
+
+En particular, si $\tau = 1$, el vendedor no espera a que aparezca una oferta superadora para aceptar la oferta actual, aceptando así todas las ofertas que recibe. A medida que reducimos la impaciencia del vendedor, es decir, incrementamos $\tau$, vemos como los resultados de la subasta se asemejan a los del modelo original.
+
+<figure>
+    <img src="attachments/impaciencia-vendedor.png"
+         alt="Modificación 5: impaciencia del vendedor"/>
+    <figcaption><b>Figura 5.</b> Resultados de las subastas con impaciencia del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
+</figure>
 
 ### 2.6 Precio de reserva dinámico
 
@@ -230,13 +308,13 @@ Se introduce un precio de reserva que puede decaer con el tiempo o actualizarse 
 
 ## 3. Conclusión y resultados
 
-El análisis de las distintas variantes del modelo de Fraiman permitió obtener una visión integral sobre cómo las reglas de paciencia, memoria y precios de reserva afectan el resultado de la subasta y el precio crítico observado. Entre los principales hallazgos se destacan:
-- Aumentar la paciencia del vendedor (`m`) tiende a incrementar el precio mínimo de venta, pero con rendimientos decrecientes a medida que `m` crece. Sin embargo, una paciencia excesiva puede llevar a demoras innecesarias en la venta.
-- Limitar la memoria del vendedor reduce la eficiencia del mecanismo, ya que puede perder oportunidades de venta óptimas y tomar decisiones subóptimas debido a la falta de información completa.
-- La paciencia finita de los compradores introduce una mayor dispersión en los precios de venta y puede reducir el precio mínimo alcanzado, ya que algunas buenas ofertas pueden expirar antes de ser aceptadas.
+En este trabajo analizamos diferentes variantes del modelo de Fraiman, D. (2022), lo que nos permitió obtener una visión integral sobre cómo las reglas de paciencia, memoria y precios de reserva afectan el resultado de la subasta y el precio crítico observado. Entre los principales hallazgos se destacan:
+- Aumentar la paciencia del vendedor ($m$) tiende a incrementar el precio mínimo de venta. Además, cuando el vendedor es muy paciente, es decir, $m>>0$, se pueden observar demoras innecesarias para aceptar las ofertas y menores ventas.
+- Limitar la memoria del vendedor reduce la eficiencia del mecanismo, ya que puede perder oportunidades de venta óptimas.
+- La paciencia finita de los compradores introduce una mayor dispersión en los precios de venta, ya que algunas buenas ofertas pueden expirar antes de ser aceptadas.
 - La impaciencia del vendedor y la introducción de precios de reserva dinámicos permiten modelar escenarios más realistas, mostrando cómo la presión temporal y la adaptación de expectativas afectan las decisiones y los resultados.
 
-En conjunto, estas simulaciones muestran la robustez y flexibilidad del modelo de Fraiman, así como la importancia de los parámetros de paciencia y memoria en el diseño de mecanismos de subasta eficientes. El trabajo realizado en la notebook permite no solo validar los resultados teóricos, sino también explorar nuevas preguntas y escenarios relevantes para la teoría de subastas y la economía experimental.
+En conjunto, los estudios realizados nos muestran la robustez y flexibilidad del modelo presentado por Fraiman, D. (2022), así como la importancia de los parámetros de paciencia y memoria en el diseño de mecanismos de subasta eficientes.
 
 ### Bibliografía
 
