@@ -226,7 +226,7 @@ En esta modificación, el vendedor también puede tener impaciencia, vendiendo a
 
 #### 2.5.1 Algoritmo
 
-A continuación se detalla la implementación del alogritmo de subasta con impaciencia del vendedor.
+A continuación se detalla la implementación del algoritmo de subasta con impaciencia del vendedor.
 
 ```pseudocode
 INPUT: 
@@ -304,7 +304,90 @@ En particular, si $\tau = 1$, el vendedor no espera a que aparezca una oferta su
 
 ### 2.6 Precio de reserva dinámico
 
-Se introduce un precio de reserva que puede decaer con el tiempo o actualizarse en función de las ventas previas. Esta variante añade una capa adicional de realismo y complejidad al modelo, permitiendo simular escenarios en los que el vendedor ajusta sus expectativas de precio en función del contexto o de la historia de la subasta.
+Se introduce un precio de reserva que se va actualizando en función de las ventas realizadas. Cuanto más tiempo tiene que esperar el vendedor para aceptar una oferta, el precio de reserva decrese y, por lo tanto, más probabilidades tenemos de aceptar la oferta candidata. De esta manera podemos modelar de forma dinámica la impaciencia del vendedor.
+
+Esta variante añade una capa adicional de realismo y complejidad al modelo, permitiendo simular escenarios en los que la impaciencia del vendedor se ajusta en función del contexto o de la historia de la subasta.
+
+#### 2.6.1 Algoritmo
+
+```pseudocode
+INPUT: 
+    bids[] - lista con las ofertas generadas
+    decay_rate - factor de decaimiento de la impaciencia
+    N - cantidad de ofertas
+
+VARIABLES:
+    pending_bids[] - lista con las ofertas pendientes
+    accepted_bids[] - lista con las ofertas aceptadas
+    accepted_indices[] - lista con los índices de las ofertas aceptadas
+    highest_pending_bid - oferta máxima dentro de las pendientes
+    impatience_threshold - umbral de impaciencia del vendedor (precio de reserva)
+    last_sale - índice (momento) de la última venta
+    first_sale - indica si es la primer venta
+    current_index - índice (momento) actual
+    sell - indica si se acepta la oferta o no
+    
+BEGIN
+    INITIALIZE pending_bids[] as empty array
+    INITIALIZE accepted_bids[] as empty array
+    INITIALIZE accepted_indices[] as empty array
+    SET last_sale ← NULL
+    SET first_sale ← TRUE
+    
+    FOR current_index FROM 1 TO N DO
+        current_bid ← bids[current_index]
+        
+        // If no pending bids, add current bid and continue
+        IF pending_bids[] is empty THEN
+            ADD current_bid TO pending_bids[]
+            CONTINUE
+        END IF
+        
+        SET highest_pending_bid ← max(pending_bids[])
+        SET impatience_threshold ← calculate_decreasing_threshold()
+        
+        // SELLING LOGIC (logical OR)
+        SET sell ← FALSE
+        
+        // Rule 1: Original structure
+        IF current_bid < highest_pending_bid THEN
+            SET sell ← TRUE
+        END IF
+        
+        // Rule 2: Seller impatience  
+        IF NOT sell AND highest_pending_bid >= impatience_threshold THEN
+            SET sell ← TRUE
+        END IF
+        
+        IF sell THEN
+            // SALE: always the highest pending bid
+            ADD highest_pending_bid TO accepted_bids[]
+            ADD index_of(highest_pending_bid) TO accepted_indices[]
+            REMOVE highest_pending_bid FROM pending_bids[]
+            ADD current_bid TO pending_bids[]
+            SET last_sale ← current_index
+        ELSE
+            // Do not sell
+            ADD current_bid TO pending_bids[]
+        END IF
+    END FOR
+    
+    RETURN accepted_bids[], accepted_indices[]
+END
+```
+
+#### 2.6.2 Resultados
+
+En la Figura 6 podemos ver como se ajusta el precio de reserva (umbral de impaciencia) del vendedor a medida que tiene que esperar más para vender la siguiente unidad.
+
+Como podemos ver en el gráfico de dispersión, incorporar el precio de reserva logra que el vendedor termine vendiendo unidades por debajo del precio crítico.
+
+<figure>
+    <img src="attachments/precio-reserva.png"
+         alt="Modificación 6: impaciencia del vendedor"/>
+    <figcaption><b>Figura 6.</b> Resultados de las subastas con precio de reserva del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
+</figure>
+
 
 ## 3. Conclusión y resultados
 
