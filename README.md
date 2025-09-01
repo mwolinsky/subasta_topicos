@@ -74,17 +74,15 @@ END
 En la Figura 1 podemos observar que, cuanto mayor sea la paciencia del vendedor, mayor es el precio crítico que se genera. Esto tiene sentido porque, si $m>>0$, una oferta es aceptada si y sólo si tiene un precio lo suficientemente alto tal que ninguna otra oferta la supere.
 
 <figure>
+    <figcaption><b>Figura 1.</b> Precio crítico del vendedor para diferentes niveles de paciencia.</figcaption>
     <img src="attachments/paciencia-finita.png"
          alt="Modificación 1: paciencia finita del vendedor"/>
-    <figcaption><b>Figura 1.</b> Precio crítico del vendedor para diferentes niveles de paciencia.</figcaption> 
 </figure>
 
 Esto también nos muestra que existe un trade-off entre la cantidad de unidades que se terminan vendiendo y la paciencia del vendedor. Si el vendedor tiene poca paciencia ($m$ bajo), entonces vende muchas unidades del producto. Por otro lado, si la paciencia del vendedor es muy alta ($m$ alto), entonces termina vendiendo pocas unidades.
 
-
-**Tabla 1: Cantidad, promedio de venta e ingreso total para cada valor de m**
-
-| m   | Q_vendida | P_promedio_vendido | Ingreso_total |
+**Tabla 1.** Cantidad total, promedio e ingreso total por ventas para cada valor de $m$.
+| m   | Q_vendida | P_promedio_vendido  | Ingreso_total |
 |-----|-----------|---------------------|---------------|
 | 1   | 635       | 0.673445            | 427.637560    |
 | 2   | 498       | 0.744411            | 370.716582    |
@@ -97,8 +95,6 @@ Esto también nos muestra que existe un trade-off entre la cantidad de unidades 
 ### 2.3 Memoria finita del vendedor
 
 En esta variante, en vez de tener memoria perfecta, el vendedor solo recuerda las últimas $k$ ofertas pendientes. Esto simula una limitación de información por parte del vendedor y nos permite entender cómo su memoria puede afectar la probabilidad de alcanzar el precio crítico y la eficiencia del mecanismo.
-
-
 
 #### 2.3.1 Algoritmo
 
@@ -147,20 +143,18 @@ END
 
 #### 2.3.2 Resultados
 
-Podemos observar en la Figura 2 como la memoria del vendedor termina afectando al precio de referencia. Para valores de $k$ bajos, el vendedor recuerda solo unas pocas ofertas, lo que dificulta la generación de un precio crítico como en el modelo original. El precio crítico se puede apreciar con mayor claridad a medida que incrementamos la memoria.
+Podemos observar en la Figura 2 cómo la memoria del vendedor termina afectando al precio de referencia. Para valores de $k$ bajos, el vendedor recuerda solo unas pocas ofertas, lo que dificulta la generación de un precio crítico como en el modelo original. El precio crítico se puede apreciar con mayor claridad a medida que incrementamos la memoria.
 
 <figure>
+    <figcaption><b>Figura 2.</b> Resultados de las subastas para distintos valores de memoria del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
     <img src="attachments/memoria-finita.png"
          alt="Modificación 2: memoria finita del vendedor"/>
-    <figcaption><b>Figura 2.</b> Resultados de las subastas para distintos valores de memoria del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
 </figure>
 
-**Tabla 2 - Memoria finita: Cantidad, Precio promedio e ingreso total para una memoria de 5 bids**
-
-| Q_vendida | P_promedio_vendido | Ingreso_total |
+**Tabla 2.** Memoria finita: Cantidad, precio promedio e ingreso total para una memoria de 5 ofertas.
+| Q_vendida | P_promedio_vendido  | Ingreso_total |
 |-----------|---------------------|---------------|
 | 614       | 0.680279            | 417.691022    |
-
 
 ### 2.4 Paciencia finita del comprador
 
@@ -227,35 +221,30 @@ La Figura 3 nos muestra como se genera el precio crítico, a medida que incremen
 El caso extremo de $\tau = 1$ nos muestra que cuando el comprador no tiene paciencia, no se vende ninguna unidad. Esto ocurre porque el vendedor siempre va a esperar a que llegue una nueva oferta para aceptar la oferta actual, pero en este caso el comprador espera que se acepte su oferta inmediatamente, lo que provoca que no ocurra ninguna venta.
 
 <figure>
+    <figcaption><b>Figura 3.</b> Resultados de las subastas para distintos valores de paciencia del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
     <img src="attachments/impaciencia-fija.png"
          alt="Modificación 3: paciencia fija del comprador"/>
-    <figcaption><b>Figura 3.</b> Resultados de las subastas para distintos valores de paciencia del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
 </figure>
 
-**Tabla 3 - Impaciencia del comprador: Cantidad, Precio promedio e ingreso total con $\tau$ = 10**
-
-| Q_vendida | P_promedio_vendido | Ingreso_total |
+**Tabla 3.** Impaciencia del comprador: Cantidad, precio promedio e ingreso total con $\tau = 10$.
+| Q_vendida | P_promedio_vendido  | Ingreso_total |
 |-----------|---------------------|---------------|
 | 594       | 0.673577            | 400.104964    |
-
 
 #### 2.4.3 Resultados con paciencia $\tau$ aleatoria para cada comprador
 
 Definimos ahora la paciencia $\tau$ del comprador utilizando una distribución exponencial. Los resultados que se muestran en la Figura 4 son similares a los que obtuvimos con paciencia fija para el comprador.
 
 <figure>
+    <figcaption><b>Figura 4.</b> Resultados de las subastas con paciencia aleatoria del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
     <img src="attachments/impaciencia_reserva.png"
          alt="Modificación 4: paciencia aletoria del comprador"/>
-    <figcaption><b>Figura 4.</b> Resultados de las subastas con paciencia aleatoria del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
 </figure>
 
-**Tabla 4 - Impaciencia del comprador variable: Cantidad, Precio promedio e ingreso total para $\lambda$ =10**
-
-| Q_vendida | P_promedio_vendido | Ingreso_total |
+**Tabla 4.** Impaciencia del comprador variable: Cantidad, precio promedio e ingreso total para $\lambda =10$
+| Q_vendida | P_promedio_vendido  | Ingreso_total |
 |-----------|---------------------|---------------|
 | 555       | 0.656938            | 364.600756    |
-
-
 
 ### 2.5 Impaciencia del vendedor - Precio de reserva dinámico
 
@@ -338,14 +327,13 @@ En la Figura 5 podemos ver como se ajusta el precio de reserva (umbral de impaci
 Como podemos ver en el gráfico de dispersión, incorporar el precio de reserva logra que el vendedor termine vendiendo unidades por debajo del precio crítico.
 
 <figure>
+    <figcaption><b>Figura 5.</b> Resultados de las subastas con precio de reserva del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
     <img src="attachments/precio-reserva.png"
          alt="Modificación 6: impaciencia del vendedor"/>
-    <figcaption><b>Figura 5.</b> Resultados de las subastas con precio de reserva del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
 </figure>
 
-**Tabla 5 - Impaciencia del Vendedor: Cantidad, Precio promedio, Ingreso total y Umbrales**
-
-| Q_vendida | P_promedio_vendido | Ingreso_total | Umbral_min | Umbral_max | Umbral_promedio |
+**Tabla 5.** Impaciencia del Vendedor: Cantidad, precio promedio, ingreso total y umbrales.
+| Q_vendida | P_promedio_vendido  | Ingreso_total | Umbral_min | Umbral_max | Umbral_promedio |
 |-----------|---------------------|---------------|------------|------------|-----------------|
 | 710       | 0.635526            | 451.223462    | 0.367879   | 0.652305   | 0.459568        |
 
