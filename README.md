@@ -81,9 +81,24 @@ En la Figura 1 podemos observar que, cuanto mayor sea la paciencia del vendedor,
 
 Esto también nos muestra que existe un trade-off entre la cantidad de unidades que se terminan vendiendo y la paciencia del vendedor. Si el vendedor tiene poca paciencia ($m$ bajo), entonces vende muchas unidades del producto. Por otro lado, si la paciencia del vendedor es muy alta ($m$ alto), entonces termina vendiendo pocas unidades.
 
+
+**Tabla 1: Cantidad, promedio de venta e ingreso total para cada valor de m**
+
+| m   | Q_vendida | P_promedio_vendido | Ingreso_total |
+|-----|-----------|---------------------|---------------|
+| 1   | 635       | 0.673445            | 427.637560    |
+| 2   | 498       | 0.744411            | 370.716582    |
+| 3   | 329       | 0.829282            | 272.833654    |
+| 5   | 197       | 0.899204            | 177.143133    |
+| 10  | 98        | 0.947085            | 92.814330     |
+| 50  | 19        | 0.986173            | 18.737289     |
+| 75  | 11        | 0.991197            | 10.903166     |
+
 ### 2.3 Memoria finita del vendedor
 
 En esta variante, en vez de tener memoria perfecta, el vendedor solo recuerda las últimas $k$ ofertas pendientes. Esto simula una limitación de información por parte del vendedor y nos permite entender cómo su memoria puede afectar la probabilidad de alcanzar el precio crítico y la eficiencia del mecanismo.
+
+
 
 #### 2.3.1 Algoritmo
 
@@ -139,6 +154,13 @@ Podemos observar en la Figura 2 como la memoria del vendedor termina afectando a
          alt="Modificación 2: memoria finita del vendedor"/>
     <figcaption><b>Figura 2.</b> Resultados de las subastas para distintos valores de memoria del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
 </figure>
+
+**Tabla 2 - Memoria finita: Cantidad, Precio promedio e ingreso total**
+
+| Q_vendida | P_promedio_vendido | Ingreso_total |
+|-----------|---------------------|---------------|
+| 614       | 0.680279            | 417.691022    |
+
 
 ### 2.4 Paciencia finita del comprador
 
@@ -210,6 +232,13 @@ El caso extremo de $\tau = 1$ nos muestra que cuando el comprador no tiene pacie
     <figcaption><b>Figura 3.</b> Resultados de las subastas para distintos valores de paciencia del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
 </figure>
 
+**Tabla 3 - Impaciencia del comprador: Cantidad, Precio promedio e ingreso total con $\tau$ = 10**
+
+| Q_vendida | P_promedio_vendido | Ingreso_total |
+|-----------|---------------------|---------------|
+| 594       | 0.673577            | 400.104964    |
+
+
 #### 2.4.3 Resultados con paciencia $\tau$ aleatoria para cada comprador
 
 Definimos ahora la paciencia $\tau$ del comprador utilizando una distribución exponencial. Los resultados que se muestran en la Figura 4 son similares a los que obtuvimos con paciencia fija para el comprador.
@@ -220,95 +249,21 @@ Definimos ahora la paciencia $\tau$ del comprador utilizando una distribución e
     <figcaption><b>Figura 4.</b> Resultados de las subastas con paciencia aleatoria del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
 </figure>
 
-### 2.5 Impaciencia del vendedor
+**Tabla 4 - Impaciencia del comprador variable: Cantidad, Precio promedio e ingreso total para $\lambda$ =10**
 
-En esta modificación, el vendedor también puede tener impaciencia, vendiendo automáticamente después de recibir una cantidad fija de ofertas, aunque no se haya alcanzado el precio crítico. Esto modela situaciones en las que el vendedor tiene una urgencia temporal o una necesidad de liquidez, y permite analizar cómo la presión temporal afecta las decisiones y los resultados de la subasta.
+| Q_vendida | P_promedio_vendido | Ingreso_total |
+|-----------|---------------------|---------------|
+| 555       | 0.656938            | 364.600756    |
 
-#### 2.5.1 Algoritmo
 
-A continuación se detalla la implementación del algoritmo de subasta con impaciencia del vendedor.
 
-```pseudocode
-INPUT: 
-    bids[] - lista con todas las ofertas generadas
-    tau - máxima cantidad de ofertas que el vendedor está dispuesto a esperar
-    N - cantidad de ofertas
-
-VARIABLES:
-    accepted_bids[] - lista con las ofertas aceptadas
-    accepted_indices[] - lista con los índices de ofertas aceptadas
-    pending_bid - la mejor oferta dentro de las que están pendientes
-    pending_index - índice de la mejor oferta pendiente
-    
-BEGIN
-    INITIALIZE accepted_bids[] as empty array
-    INITIALIZE accepted_indices[] as empty array
-    SET pending_bid ← NULL
-    SET pending_index ← NULL
-    
-    FOR i FROM 1 TO N DO
-        current_bid ← bids[i]
-        
-        // First bid becomes the initial candidate
-        IF pending_bid = NULL THEN
-            SET pending_bid ← current_bid
-            SET pending_index ← i
-            CONTINUE
-        END IF
-        
-        // Check if seller's patience has been exhausted
-        IF (i - pending_index) >= tau THEN
-            // Accept the best bid found so far
-            ADD pending_bid TO accepted_bids[]
-            ADD pending_index TO accepted_indices[]
-            
-            // Current bid becomes new candidate
-            SET pending_bid ← current_bid
-            SET pending_index ← i
-            CONTINUE
-        END IF
-        
-        // If current bid is worse than pending bid, accept the pending bid
-        IF current_bid < pending_bid THEN
-            ADD pending_bid TO accepted_bids[]
-            ADD pending_index TO accepted_indices[]
-            
-            // Current bid becomes new candidate
-            SET pending_bid ← current_bid
-            SET pending_index ← i
-        ELSE
-            // Current bid is better, it becomes new candidate
-            // (previous candidate is discarded without acceptance)
-            SET pending_bid ← current_bid
-            SET pending_index ← i
-        END IF
-    END FOR
-    
-    // Final pending bid is never sold (remains unsold)
-    
-    RETURN accepted_bids[], accepted_indices[]
-END
-```
-
-#### 2.5.2 Resultados
-
-En la Figura 5 podemos observar que cuanto más impaciente es el vendedor, menor probabilidad tenemos de que se genere un precio crítico como en el modelo original. 
-
-En particular, si $\tau = 1$, el vendedor no espera a que aparezca una oferta superadora para aceptar la oferta actual, aceptando así todas las ofertas que recibe. A medida que reducimos la impaciencia del vendedor, es decir, incrementamos $\tau$, vemos como los resultados de la subasta se asemejan a los del modelo original.
-
-<figure>
-    <img src="attachments/impaciencia-vendedor.png"
-         alt="Modificación 5: impaciencia del vendedor"/>
-    <figcaption><b>Figura 5.</b> Resultados de las subastas con impaciencia del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
-</figure>
-
-### 2.6 Precio de reserva dinámico
+### 2.5 Impaciencia del vendedor - Precio de reserva dinámico
 
 Se introduce un precio de reserva que se va actualizando en función de las ventas realizadas. Cuanto más tiempo tiene que esperar el vendedor para aceptar una oferta, el precio de reserva decrese y, por lo tanto, más probabilidades tenemos de aceptar la oferta candidata. De esta manera podemos modelar de forma dinámica la impaciencia del vendedor.
 
 Esta variante añade una capa adicional de realismo y complejidad al modelo, permitiendo simular escenarios en los que la impaciencia del vendedor se ajusta en función del contexto o de la historia de la subasta.
 
-#### 2.6.1 Algoritmo
+#### 2.5.1 Algoritmo
 
 ```pseudocode
 INPUT: 
@@ -376,17 +331,23 @@ BEGIN
 END
 ```
 
-#### 2.6.2 Resultados
+#### 2.5.2 Resultados
 
-En la Figura 6 podemos ver como se ajusta el precio de reserva (umbral de impaciencia) del vendedor a medida que tiene que esperar más para vender la siguiente unidad.
+En la Figura 5 podemos ver como se ajusta el precio de reserva (umbral de impaciencia) del vendedor a medida que tiene que esperar más para vender la siguiente unidad.
 
 Como podemos ver en el gráfico de dispersión, incorporar el precio de reserva logra que el vendedor termine vendiendo unidades por debajo del precio crítico.
 
 <figure>
     <img src="attachments/precio-reserva.png"
          alt="Modificación 6: impaciencia del vendedor"/>
-    <figcaption><b>Figura 6.</b> Resultados de las subastas con precio de reserva del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
+    <figcaption><b>Figura 5.</b> Resultados de las subastas con precio de reserva del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
 </figure>
+
+**Tabla 5 - Impaciencia del Vendedor: Cantidad, Precio promedio, Ingreso total y Umbrales**
+
+| Q_vendida | P_promedio_vendido | Ingreso_total | Umbral_min | Umbral_max | Umbral_promedio |
+|-----------|---------------------|---------------|------------|------------|-----------------|
+| 710       | 0.635526            | 451.223462    | 0.367879   | 0.652305   | 0.459568        |
 
 
 ## 3. Conclusión y resultados
