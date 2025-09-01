@@ -71,15 +71,23 @@ END
 
 #### 2.2.2 Resultados
 
-En la Figura 1 podemos observar que, cuanto mayor sea la paciencia del vendedor, mayor es el precio crítico que se genera. Esto tiene sentido porque, si $m>>0$, una oferta es aceptada si y sólo si tiene un precio lo suficientemente alto tal que ninguna otra oferta la supere.
+En la Figura 1.1 podemos observar que, cuanto mayor sea la paciencia del vendedor, mayor es el precio crítico que se genera. Esto tiene sentido porque, si $m>>0$, una oferta es aceptada si y solo si tiene un precio lo suficientemente alto tal que ninguna de las $m$ ofertas que le siguen la supere.
 
 <figure>
-    <figcaption><b>Figura 1.</b> Precio crítico del vendedor para diferentes niveles de paciencia.</figcaption>
+    <figcaption><b>Figura 1.1.</b> Precio crítico del vendedor para diferentes niveles de paciencia.</figcaption>
     <img src="attachments/paciencia-finita.png"
          alt="Modificación 1: paciencia finita del vendedor"/>
 </figure>
 
 Esto también nos muestra que existe un trade-off entre la cantidad de unidades que se terminan vendiendo y la paciencia del vendedor. Si el vendedor tiene poca paciencia ($m$ bajo), entonces vende muchas unidades del producto. Por otro lado, si la paciencia del vendedor es muy alta ($m$ alto), entonces termina vendiendo pocas unidades.
+
+La Figura 1.2 nos muestra los histogramas de las ofertas aceptadas para subastas con distintos valores de $m$. Podemos ver que cuando $m=1$, el precio mínimo de venta es $\sim 0.356$, es decir, el precio crítico encontrado en Fraiman, D. (2022). Sin embargo, a medida que el vendedor se vuelve más paciente (incrementa $m$), el precio mínimo de venta sube.
+
+<figure>
+    <figcaption><b>Figura 1.2.</b> Histograma de subastas para distintos niveles de paciencia del vendedor.</figcaption>
+    <img src="attachments/x_max_histogram.jpeg"
+         alt="Modificación 1.2: histograma"/>
+</figure>
 
 **Tabla 1.** Cantidad total, promedio e ingreso total por ventas para cada valor de $m$.
 | m   | Q_vendida | P_promedio_vendido  | Ingreso_total |
