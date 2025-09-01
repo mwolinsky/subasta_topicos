@@ -155,7 +155,7 @@ Podemos observar en la Figura 2 como la memoria del vendedor termina afectando a
     <figcaption><b>Figura 2.</b> Resultados de las subastas para distintos valores de memoria del vendedor. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption> 
 </figure>
 
-**Tabla 2 - Memoria finita: Cantidad, Precio promedio e ingreso total**
+**Tabla 2 - Memoria finita: Cantidad, Precio promedio e ingreso total para una memoria de 5 bids**
 
 | Q_vendida | P_promedio_vendido | Ingreso_total |
 |-----------|---------------------|---------------|
