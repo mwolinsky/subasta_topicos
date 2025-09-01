@@ -79,15 +79,30 @@ En la Figura 1.1 podemos observar que, cuanto mayor sea la paciencia del vendedo
          alt="Modificación 1: paciencia finita del vendedor"/>
 </figure>
 
-Esto también nos muestra que existe un trade-off entre la cantidad de unidades que se terminan vendiendo y la paciencia del vendedor. Si el vendedor tiene poca paciencia ($m$ bajo), entonces vende muchas unidades del producto. Por otro lado, si la paciencia del vendedor es muy alta ($m$ alto), entonces termina vendiendo pocas unidades.
-
-La Figura 1.2 nos muestra los histogramas de las ofertas aceptadas para subastas con distintos valores de $m$. Podemos ver que cuando $m=1$, el precio mínimo de venta es $\sim 0.356$, es decir, el precio crítico encontrado en Fraiman, D. (2022). Sin embargo, a medida que el vendedor se vuelve más paciente (incrementa $m$), el precio mínimo de venta sube.
+Esto también nos muestra que existe un trade-off entre la cantidad de unidades que se terminan vendiendo y la paciencia del vendedor. Si el vendedor tiene poca paciencia ($m$ bajo), entonces termina aceptando una proporción alta de las ofertas. Por otro lado, si la paciencia del vendedor es muy alta ($m$ alto), entonces termina aceptando pocas ofertas. Este trade-off se puede observar en detalle con la Figura 1.2.
 
 <figure>
-    <figcaption><b>Figura 1.2.</b> Histograma de subastas para distintos niveles de paciencia del vendedor.</figcaption>
+    <figcaption><b>Figura 1.2.</b> Proporción de ventas realizadas según la paciencia del vendedor.</figcaption>
+    <img src="attachments/prop-ventas.png"
+         alt="Modificación 1.2: proporciones"/>
+</figure>  
+
+La Figura 1.3 nos muestra los histogramas de las ofertas aceptadas para subastas con distintos valores de $m$. Podemos ver que cuando $m=1$, el precio mínimo de venta es $\sim 0.356$, es decir, el precio crítico encontrado en Fraiman, D. (2022). Sin embargo, a medida que el vendedor se vuelve más paciente (incrementa $m$), el precio mínimo de venta incrementa.
+
+<figure>
+    <figcaption><b>Figura 1.3.</b> Histograma de subastas para distintos niveles de paciencia del vendedor.</figcaption>
     <img src="attachments/x_max_histogram.jpeg"
-         alt="Modificación 1.2: histograma"/>
+         alt="Modificación 1.3: histograma"/>
 </figure>
+
+Por último, realizamos un análisis de ley de potencias, del cual obtuvimos un exponente cercano a $-0.98$, lo que sugiere una relación hiperbólica inversa. Esto quiere decir que el comportamiento del vendedor en la subasta es predecible y sigue una ley matemática simple. En particular, cada vez que el vendedor duplica su paciencia, la cantidad de ofertas aceptadas se reduce a la mitad.
+
+<figure>
+    <figcaption><b>Figura 1.4.</b> Análisis de ley de potencias para las subastas.</figcaption>
+    <img src="attachments/ley-potencias.png"
+         alt="Modificación 1.4: ley de potencias"/>
+</figure>
+
 
 **Tabla 1.** Cantidad total, promedio e ingreso total por ventas para cada valor de $m$.
 | m   | Q_vendida | P_promedio_vendido  | Ingreso_total |
@@ -99,6 +114,8 @@ La Figura 1.2 nos muestra los histogramas de las ofertas aceptadas para subastas
 | 10  | 98        | 0.947085            | 92.814330     |
 | 50  | 19        | 0.986173            | 18.737289     |
 | 75  | 11        | 0.991197            | 10.903166     |
+
+
 
 ### 2.3 Memoria finita del vendedor
 
