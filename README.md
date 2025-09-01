@@ -244,7 +244,7 @@ El caso extremo de $\tau = 1$ nos muestra que cuando el comprador no tiene pacie
 Definimos ahora la paciencia $\tau$ del comprador utilizando una distribución exponencial. Los resultados que se muestran en la Figura 4 son similares a los que obtuvimos con paciencia fija para el comprador.
 
 <figure>
-    <img src="attachments/impaciencia-aleatoria.png"
+    <img src="attachments/impaciencia_reserva.png"
          alt="Modificación 4: paciencia aletoria del comprador"/>
     <figcaption><b>Figura 4.</b> Resultados de las subastas con paciencia aleatoria del comprador. La línea punteada representa el precio crítico encontrado en Fraiman, D. (2022).</figcaption>
 </figure>
