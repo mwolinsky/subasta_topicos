@@ -105,15 +105,61 @@ Finalmente, se realizó un análisis de ley de potencias, del cual se obtuvo un 
 
 
 **Tabla 1.** Cantidad total, promedio e ingreso total por ventas para cada valor de $m$.
-| m   | Q_vendida | P_promedio_vendido  | Ingreso_total |
-|-----|-----------|---------------------|---------------|
-| 1   | 635       | 0.673445            | 427.637560    |
-| 2   | 498       | 0.744411            | 370.716582    |
-| 3   | 329       | 0.829282            | 272.833654    |
-| 5   | 197       | 0.899204            | 177.143133    |
-| 10  | 98        | 0.947085            | 92.814330     |
-| 50  | 19        | 0.986173            | 18.737289     |
-| 75  | 11        | 0.991197            | 10.903166     |
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right;">m</th>
+      <th style="text-align: right;">Q_vendida</th>
+      <th style="text-align: right;">P_promedio_vendido</th>
+      <th style="text-align: right;">Ingreso_total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right;">1</td>
+      <td style="text-align: right;">635</td>
+      <td style="text-align: right;">0.67</td>
+      <td style="text-align: right;">427.64</td>
+    </tr>
+    <tr>
+      <td style="text-align: right;">2</td>
+      <td style="text-align: right;">498</td>
+      <td style="text-align: right;">0.74</td>
+      <td style="text-align: right;">370.72</td>
+    </tr>
+    <tr>
+      <td style="text-align: right;">3</td>
+      <td style="text-align: right;">329</td>
+      <td style="text-align: right;">0.83</td>
+      <td style="text-align: right;">272.83</td>
+    </tr>
+    <tr>
+      <td style="text-align: right;">5</td>
+      <td style="text-align: right;">197</td>
+      <td style="text-align: right;">0.90</td>
+      <td style="text-align: right;">177.14</td>
+    </tr>
+    <tr>
+      <td style="text-align: right;">10</td>
+      <td style="text-align: right;">98</td>
+      <td style="text-align: right;">0.95</td>
+      <td style="text-align: right;">92.81</td>
+    </tr>
+    <tr>
+      <td style="text-align: right;">50</td>
+      <td style="text-align: right;">19</td>
+      <td style="text-align: right;">0.99</td>
+      <td style="text-align: right;">18.74</td>
+    </tr>
+    <tr>
+      <td style="text-align: right;">75</td>
+      <td style="text-align: right;">11</td>
+      <td style="text-align: right;">0.99</td>
+      <td style="text-align: right;">10.90</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
@@ -177,9 +223,23 @@ Se observa en la Figura 2 cómo la memoria del vendedor afecta al precio de refe
 </figure>
 
 **Tabla 2.** Memoria finita: Cantidad, precio promedio e ingreso total para una memoria de 5 ofertas.
-| Q_vendida | P_promedio_vendido  | Ingreso_total |
-|-----------|---------------------|---------------|
-| 614       | 0.680279            | 417.691022    |
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right;">Q_vendida</th>
+      <th style="text-align: right;">P_promedio_vendido</th>
+      <th style="text-align: right;">Ingreso_total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right;">614</td>
+      <td style="text-align: right;">0.68</td>
+      <td style="text-align: right;">417.69</td>
+    </tr>
+  </tbody>
+</table>
 
 ### 2.4 Paciencia finita del comprador
 
@@ -252,9 +312,23 @@ El caso extremo de $\tau = 1$ muestra que cuando el comprador no tiene paciencia
 </figure>
 
 **Tabla 3.** Impaciencia del comprador: Cantidad, precio promedio e ingreso total con $\tau = 10$.
-| Q_vendida | P_promedio_vendido  | Ingreso_total |
-|-----------|---------------------|---------------|
-| 594       | 0.673577            | 400.104964    |
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right;">Q_vendida</th>
+      <th style="text-align: right;">P_promedio_vendido</th>
+      <th style="text-align: right;">Ingreso_total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right;">594</td>
+      <td style="text-align: right;">0.67</td>
+      <td style="text-align: right;">400.10</td>
+    </tr>
+  </tbody>
+</table>
 
 #### 2.4.3 Resultados con paciencia $\tau$ aleatoria para cada comprador
 
@@ -267,9 +341,23 @@ Se define ahora la paciencia $\tau$ del comprador utilizando una distribución e
 </figure>
 
 **Tabla 4.** Impaciencia del comprador variable: Cantidad, precio promedio e ingreso total para $\lambda =10$
-| Q_vendida | P_promedio_vendido  | Ingreso_total |
-|-----------|---------------------|---------------|
-| 555       | 0.656938            | 364.600756    |
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right;">Q_vendida</th>
+      <th style="text-align: right;">P_promedio_vendido</th>
+      <th style="text-align: right;">Ingreso_total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right;">555</td>
+      <td style="text-align: right;">0.66</td>
+      <td style="text-align: right;">364.60</td>
+    </tr>
+  </tbody>
+</table>
 
 ### 2.5 Impaciencia del vendedor - Precio de reserva dinámico
 
@@ -358,9 +446,29 @@ Como se puede ver en el gráfico de dispersión, incorporar el precio de reserva
 </figure>
 
 **Tabla 5.** Impaciencia del Vendedor: Cantidad, precio promedio, ingreso total y umbrales.
-| Q_vendida | P_promedio_vendido  | Ingreso_total | Umbral_min | Umbral_max | Umbral_promedio |
-|-----------|---------------------|---------------|------------|------------|-----------------|
-| 710       | 0.635526            | 451.223462    | 0.367879   | 0.652305   | 0.459568        |
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right;">Q_vendida</th>
+      <th style="text-align: right;">P_promedio_vendido</th>
+      <th style="text-align: right;">Ingreso_total</th>
+      <th style="text-align: right;">Umbral_min</th>
+      <th style="text-align: right;">Umbral_max</th>
+      <th style="text-align: right;">Umbral_promedio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right;">710</td>
+      <td style="text-align: right;">0.64</td>
+      <td style="text-align: right;">451.22</td>
+      <td style="text-align: right;">0.37</td>
+      <td style="text-align: right;">0.65</td>
+      <td style="text-align: right;">0.46</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## 3. Conclusiones y resultados
