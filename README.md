@@ -106,7 +106,7 @@ Finalmente, se realizó un análisis de ley de potencias, del cual se obtuvo un 
 
 **Tabla 1.** Cantidad total, promedio e ingreso total por ventas para cada valor de $m$.
 
-<table>
+<table style="margin: 0 auto;">
   <thead>
     <tr>
       <th style="text-align: right;">m</th>
@@ -224,7 +224,7 @@ Se observa en la Figura 2 cómo la memoria del vendedor afecta al precio de refe
 
 **Tabla 2.** Memoria finita: Cantidad, precio promedio e ingreso total para una memoria de 5 ofertas.
 
-<table>
+<table style="margin: 0 auto;">
   <thead>
     <tr>
       <th style="text-align: right;">Q_vendida</th>
@@ -313,7 +313,7 @@ El caso extremo de $\tau = 1$ muestra que cuando el comprador no tiene paciencia
 
 **Tabla 3.** Impaciencia del comprador: Cantidad, precio promedio e ingreso total con $\tau = 10$.
 
-<table>
+<table style="margin: 0 auto;">
   <thead>
     <tr>
       <th style="text-align: right;">Q_vendida</th>
@@ -342,7 +342,7 @@ Se define ahora la paciencia $\tau$ del comprador utilizando una distribución e
 
 **Tabla 4.** Impaciencia del comprador variable: Cantidad, precio promedio e ingreso total para $\lambda =10$
 
-<table>
+<table style="margin: 0 auto;">
   <thead>
     <tr>
       <th style="text-align: right;">Q_vendida</th>
@@ -447,7 +447,7 @@ Como se puede ver en el gráfico de dispersión, incorporar el precio de reserva
 
 **Tabla 5.** Impaciencia del Vendedor: Cantidad, precio promedio, ingreso total y umbrales.
 
-<table>
+<table style="margin: 0 auto;">
   <thead>
     <tr>
       <th style="text-align: right;">Q_vendida</th>
